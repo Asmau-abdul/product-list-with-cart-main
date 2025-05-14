@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./src/build.css">
+  
+  <title>Frontend Mentor | Product list with cart</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body class="bg-rose-50">
+
+  <!-- Div for the entire page -->
+  <div class="p-5 md:p-10 container">
+
+    <!-- Desserts text -->
+    <div>
+      <h1 class="text-3xl font-bold pb-6">Desserts</h1>
+    </div>
+
+    <!-- Main body -->
+    <div class="md:grid grid-cols-[3fr_1.5fr] gap-10">
+      
+      <!-- Pastries options -->
+      <div class="md:grid md:grid-cols-3 md:gap-5 pastry-options">
+      </div>
+
+      <!-- checkout -->
+     <div class="bg-white p-4 rounded-lg h-fit">
+        <h1 class="text-rose-500 text-2xl font-bold">Your Cart (<span class="js-quantity">0</span>)</h1>
+        <div class="js-empty-cart">
+          <img class="mx-auto py-5 " src="assets/images/illustration-empty-cart.svg" alt="empty cart">
+
+          <p class="text-xs text-center font-semibold pb-5 
+          flex justify-center text-rose-300">
+            Your added items will appear here
+          </p>
+        </div>
+
+        <!-- checkout cart -->
+        <div>
+          <ul class="js-checkout-cart"> </ul>
+        </div>
+        <div class=" js-carbon-neutral">
+
+          <div class="flex justify-between py-6">
+            <p>Order Total</p>
+            <h2 class="font-bold text-xl js-order-total"></h2>
+          </div>
+
+          <div class="bg-rose-50 p-3 text-center rounded-lg">
+            <p class="text-xs">
+              <img class="inline" src="assets/images/icon-carbon-neutral.svg" alt="">
+              This is a <span class="font-bold">carbon-neutral</span> delivery
+            </p>
+          </div>
+
+          <div>
+            <button class="text-white bg-rose-300 w-full my-8 p-4 font-semibold 
+            text-lg rounded-full js-confirm-order">Confirm Order</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Order confirmed -->
+    <div class="bg-transparent w-full bg-black bg-opacity-40 absolute top-0 bottom-0 left-0 right-0 
+    hidden h-[150vh] js-checkout-confirmed-order">
+      <div class=" bg-white p-10 rounded-lg md:w-1/2 mx-auto mt-[25%]">
+        <img src="assets/images/icon-order-confirmed.svg" alt="">
+        <h2 class="font-semibold text-3xl py-3">Order Confirmed</h2>
+        <p class="text-xs text-rose-300">We hope you enjoy your food!</p>
+        <div class="mt-7 rounded-lg bg-rose-50">
+          <ul class="px-7 js-order-confirmed"> </ul>
+          <div class="flex justify-between p-6">
+            <p>Order Total</p>
+            <h2 class="font-bold text-xl js-order-confirmed-total">$</h2>
+          </div>
+        </div>
+        
+        <!-- start new order button -->
+        <div>
+          <button class="text-white bg-rose-300 w-full my-8 p-4 font-semibold 
+          text-lg rounded-full js-new-order">Start New Order</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script type="module" src="scripts/app.js"></script>
+</body>
+</html>
