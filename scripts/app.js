@@ -66,7 +66,6 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
         addToCart(pastryName, pastryPrice, pastryShortname)
         updateCartQuantity()
-        console.log(cart)
         updateCart()
     })
 })
@@ -135,9 +134,6 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
         orderTotal.innerHTML = `$${priceCent(orderTotalSum)}`
         orderTotalConfirmed.innerHTML = `$${priceCent(orderTotalSum)}`
-        console.log(orderTotalConfirmed)
-
-        console.log(priceCent(orderTotalSum))
 
         updateCartQuantity()
         //deletes pastry from cart
@@ -146,7 +142,6 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
                 let deleteButton = deleted.dataset.pastryDelete
                 removeFromCart(deleteButton)
                 let container = document.querySelector(`.js-cart-item-${deleteButton}`)
-                console.log(deleteButton)
                 container.remove()
                 updateCart()
             })
