@@ -84,7 +84,6 @@ export function removeFromCart(shortName){
     })
 
     cart = newCart
-    console.log(cart)
 
     saveToStorage()
 }
@@ -92,5 +91,4 @@ export function removeFromCart(shortName){
 export function clearCart(){
     cart = []
     saveToStorage()
-    console.log(cart)
 }
