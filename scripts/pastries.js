@@ -52,7 +52,7 @@ function saveToStorage(){
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-export function addToCart(pastryName, pastryPrice, shortName){
+export function addToCart(pastryName, pastryPrice, shortName, jsPlusMinus){
     let matchingItem;
             
     cart.forEach((item) => {
@@ -75,6 +75,42 @@ export function addToCart(pastryName, pastryPrice, shortName){
     saveToStorage()
 }
 
+export function addToCartDecrease(pastryName, pastryIndex, 
+    pastryButtonBack, itemQuantity){
+    let matchingItem;
+            
+    cart.forEach((item) => {
+        if(pastryName == item.pastryName){
+            matchingItem = item
+            if(item.quantity <= 1){
+                removeFromCart(item)
+                cart.splice(item, 1)
+                pastryIndex.classList.add('none')
+                pastryButtonBack.classList.remove('none')
+            }else{
+                item.quantity -= 1
+                itemQuantity.innerHTML = item.quantity
+            }
+        }
+    })
+    
+    saveToStorage()
+}
+
+export function addToCartIncrease(pastryName, itemQuantity){
+    let matchingItem
+            
+    cart.forEach((item) => {
+        if(pastryName == item.pastryName){
+            matchingItem = item
+            item.quantity += 1
+            itemQuantity.innerHTML = item.quantity
+        }
+    })
+    
+    
+    saveToStorage()
+}
 export function removeFromCart(shortName){
     let newCart = []
     cart.forEach((cartItem) => {

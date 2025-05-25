@@ -1,11 +1,11 @@
-import { cart, pastries, addToCart, removeFromCart, clearCart } from "./pastries.js";
+import { cart, pastries, addToCart, removeFromCart, clearCart, addToCartDecrease, addToCartIncrease } from "./pastries.js";
 import { priceCent } from "./utils.js";
 
 //accessing pastry options
 let pastryOptions = document.querySelector('.pastry-options')
 
 //add pastries from database
-pastries.forEach((pastry) => {
+pastries.forEach((pastry, index) => {
     pastryOptions.innerHTML += `
         <div class="mb-7">
         <div>
@@ -16,13 +16,30 @@ pastries.forEach((pastry) => {
           </picture>
         </div>
         <div class="-mt-5 pb-4 flex justify-center">
+        
           <button class="font-semibold text-sm border border-rose-300 py-2 px-7
-          rounded-3xl bg-white js-add-to-cart" 
-          data-pastry-name="${pastry.name}" 
-          data-pastry-price="${pastry.price}"
-          data-pastry-shortname="${pastry.image}"">
-         <img class="inline pr-2" src="assets/images/icon-add-to-cart.svg" alt="">
-         Add to Cart</button>
+              rounded-3xl bg-white js-add-to-cart" 
+              data-pastry-name="${pastry.name}" 
+              data-pastry-price="${pastry.price}"
+              data-pastry-shortname="${pastry.image}"">
+            <img class="inline pr-2" src="assets/images/icon-add-to-cart.svg" alt="">
+            Add to Cart</button>
+            
+         <div class="font-semibold text-sm border border-rose-300 p-2 w-36
+            rounded-3xl bg-rose-300 flex justify-between none">
+          
+            <button class="border border-white p-[2px] rounded-[100%] js-decrease"
+              data-pastry-name="${pastry.name}">
+            <img class="inline p-1" src="assets/images/icon-decrement-quantity.svg" alt="">
+            </button>
+          
+            <p class="pt-1 text-white js-item-quantity-cart">1</p>
+          
+            <button class="border border-white p-[2px] rounded-[100%] js-increase"
+              data-pastry-name="${pastry.name}">
+            <img class="inline  p-1" src="assets/images/icon-increment-quantity.svg" alt="">
+            </button>
+         </div>
         </div>
         <p class="text-rose-300 text-sm">${pastry.shortName}</p>
         <h2 class="font-semibold">${pastry.name}</h2>
@@ -58,16 +75,56 @@ function updateCartQuantity(quantity){
 
 //add to cart functionality
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
 
         let pastryName = button.dataset.pastryName
         let pastryPrice = button.dataset.pastryPrice
         let pastryShortname = button.dataset.pastryShortname
+        let pastryIndex = e.target
+        pastryIndex.classList.add('none')
+        pastryIndex.nextElementSibling.classList.remove('none')
 
-        addToCart(pastryName, pastryPrice, pastryShortname)
+        addToCart(pastryName, pastryPrice, pastryShortname, button)
         updateCartQuantity()
         updateCart()
+
+
     })
+})
+
+//add to cart functionality increment and decrement
+
+// decrease
+document.querySelectorAll('.js-decrease').forEach((button) => {
+  button.addEventListener('click', (e) => {
+
+      let pastryName = button.dataset.pastryName
+      let pastryIndex = e.target.parentElement
+      let itemQuantity = pastryIndex.nextElementSibling
+      let pastryButtonBack = pastryIndex.parentElement.previousElementSibling
+
+
+      addToCartDecrease(pastryName, pastryIndex.parentElement, 
+        pastryButtonBack, itemQuantity)
+      updateCartQuantity()
+      updateCart()
+
+
+  })
+})
+
+// increase
+document.querySelectorAll('.js-increase').forEach((button) => {
+  button.addEventListener('click', (e) => {
+
+      let pastryName = button.dataset.pastryName
+      let pastryIndex = e.target.parentElement
+      let itemQuantity = pastryIndex.previousElementSibling
+
+      addToCartIncrease(pastryName, itemQuantity)
+      updateCartQuantity()
+      updateCart()
+  })
 })
 
 
@@ -136,6 +193,8 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
         orderTotalConfirmed.innerHTML = `$${priceCent(orderTotalSum)}`
 
         updateCartQuantity()
+
+      
         //deletes pastry from cart
         document.querySelectorAll('.js-delete').forEach((deleted) => {
             deleted.addEventListener('click', () => {

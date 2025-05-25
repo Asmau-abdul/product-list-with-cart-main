@@ -6,6 +6,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="./src/build.css">
+  <link rel="stylesheet" href="./src/styling.css">
   
   <title>Frontend Mentor | Product list with cart</title>
 
@@ -15,7 +16,7 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
-<body class="bg-rose-50">
+<body class="bg-rose-50 sm:min-h-screen sm:overflow-y-auto">
 
   <!-- Div for the entire page -->
   <div class="p-5 md:p-10 container">
@@ -75,8 +76,8 @@
 
     <!-- Order confirmed -->
     <div class="bg-transparent w-full bg-black bg-opacity-40 absolute top-0 bottom-0 left-0 right-0 
-    hidden h-[150vh] js-checkout-confirmed-order">
-      <div class=" bg-white p-10 rounded-lg md:w-1/2 mx-auto mt-[25%]">
+      hidden js-checkout-confirmed-order  sm:h-[200%]">
+      <div class=" bg-white p-10 rounded-lg md:w-1/2 m-auto my-[25%]">
         <img src="assets/images/icon-order-confirmed.svg" alt="">
         <h2 class="font-semibold text-3xl py-3">Order Confirmed</h2>
         <p class="text-xs text-rose-300">We hope you enjoy your food!</p>
